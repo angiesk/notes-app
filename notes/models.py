@@ -1,7 +1,6 @@
 from django.db import models
 
 class Note(models.Model):
-    id = models.CharField(max_length=50,primary_key=True,default="")
     title = models.CharField(max_length=150)
     content  = models.TextField(default="")
     created_at =models.DateTimeField(auto_now_add=True)
