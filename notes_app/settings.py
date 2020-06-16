@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
+    'channels',
     'corsheaders',
     'rest_framework',
     
@@ -53,6 +54,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:8000',
 ]
 
 ROOT_URLCONF = 'notes_app.urls'
@@ -124,3 +129,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# ASYNC SERVER GATEWAY INTERFACE-for aync web socket interface
+ASGI_APPLICATION = "notes_app.routing.application"
+
+CHANNEL_LAYERS = {
+    "default": {
+        'BACKEND':'channels_redis.core.RedidChannelLayer',
+        'CONFIG':{
+            "HOST":[('127.0.0.1',6379)]
+        },
+    },
+}

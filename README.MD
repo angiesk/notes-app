@@ -20,3 +20,19 @@
 5.Run local server
 
 `python manage.py runserver 8000`
+
+## For Redis
+
+Use docker to  run redis
+
+fetch image
+
+`docker pull redis`
+
+run image with your port number , in this case 6379
+
+`docker run -p 6379:6379 -d redis`
+
+check if the container is running
+
+`docker ps`
