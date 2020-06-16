@@ -18,4 +18,5 @@
 `python manage.py migrate`
 
 5.Run local server
+
 `python manage.py runserver 8000`
