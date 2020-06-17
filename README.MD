@@ -23,7 +23,7 @@
 
 ## For Redis
 
-Use docker to  run redis
+Use docker to run redis
 
 fetch image
 
@@ -68,3 +68,12 @@ check if the container is running
 Visit react app at :
 
     http://localhost:3000
+
+Running linting from front-end-directory
+
+    npm run lint --fix src/App.js
+
+Running Auto Pep for py code
+autopep8 -i settings.py
+
+autopep8 -ri notes/

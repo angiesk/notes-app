@@ -5,10 +5,10 @@ from . import serializers
 
 
 class NoteList(generics.ListCreateAPIView):
-  queryset = models.Note.objects.all()
-  serializer_class = serializers.NoteSerializer
+    queryset = models.Note.objects.all()
+    serializer_class = serializers.NoteSerializer
 
 
 class NoteDetail(generics.RetrieveUpdateDestroyAPIView):
-  queryset = models.Note.objects.all()
-  serializer_class = serializers.NoteSerializer
+    queryset = models.Note.objects.all()
+    serializer_class = serializers.NoteSerializer

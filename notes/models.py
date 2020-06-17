@@ -1,14 +1,15 @@
 from django.db import models
 
+
 class Note(models.Model):
     title = models.CharField(max_length=150)
-    content  = models.TextField(default="")
-    created_at =models.DateTimeField(auto_now_add=True)
+    content = models.TextField(default="")
+    created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
-    
+
     def __str__(self):
         return self.title
-      
+
 # class User(models.Model):
 #     name = models.CharField(max_length = 20,default="")
 #     user_id = models.CharField(max_length = 20,primary_key=True,default="")
@@ -28,7 +29,6 @@ class Note(models.Model):
 #     description  = models.CharField(max_length=200,default="")
 #     status = models.BooleanField(default=False)
 #     group_id = models.ForeignKey(Group,on_delete=models.CASCADE)
-
 
 
 # class GroupTaskMapping(models.Model):
