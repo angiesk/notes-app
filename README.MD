@@ -36,3 +36,35 @@ run image with your port number , in this case 6379
 check if the container is running
 
 `docker ps`
+
+## Front End
+
+### NodeJs
+
+**To install nvm visit the below url:**
+
+`https://github.com/nvm-sh/nvm`
+
+- Install node js
+
+      nvm install --lts
+
+- Use installed version
+
+      nvm use --lts
+
+- Deactivate running node version
+
+      nvm deactivate
+
+### Creating a react js app
+
+`npx create-react-app notes-app-front-end`
+
+`cd notes-app-front-end`
+
+`npm start`
+
+Visit react app at :
+
+    http://localhost:3000
