@@ -57,7 +57,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_WHITELIST = [
-    'http://localhost:8000',
+    'http://localhost:8000', 'http://localhost:3000',
 ]
 
 ROOT_URLCONF = 'notes_app.urls'
@@ -135,9 +135,9 @@ ASGI_APPLICATION = "notes_app.routing.application"
 
 CHANNEL_LAYERS = {
     "default": {
-        'BACKEND': 'channels_redis.core.RedidChannelLayer',
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "HOST": [('127.0.0.1', 6379)]
+            "hosts": [('127.0.0.1', 6379)]
         },
     },
 }

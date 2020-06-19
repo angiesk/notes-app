@@ -2,46 +2,91 @@ import React, { Component } from "react";
 import { Button, Container, Row, Col } from "reactstrap";
 
 import ListNotes from "./components/ListNotes";
+import AddNoteForm from "./components/AddNoteForm";
+import EditNoteForm from "./components/EditNoteForm";
 
-var notes1 = [
-  {
-    id: 1,
-    title: "First",
-    content: "Abc",
-    created_at: "2020-06-16T08:53:06.789784Z",
-    updated_at: "2020-06-16T08:53:06.789828Z",
-  },
-  {
-    id: 2,
-    title: "Second",
-    content: "some",
-    created_at: "2020-06-16T08:55:48.923630Z",
-    updated_at: "2020-06-16T08:55:48.923660Z",
-  },
-];
+import { fetchNotes, fetchNote, updateNote, addNote } from "./api";
+import Websocket from "react-websocket";
+import swal from "sweetalert";
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      notes: notes1,
+      notes: [],
+      note: {},
       current_note_id: 0,
       is_creating: true,
+      is_fetching: true,
     };
+
     this.handleItemClick = this.handleItemClick.bind(this);
     this.handleAddNote = this.handleAddNote.bind(this);
+    this.getData = this.getData.bind(this);
+    this.handleSaveNote = this.handleSaveNote.bind(this);
+    this.handleOnChange = this.handleOnChange.bind(this);
   }
 
-  handleItemClick(id) {
+  componentDidMount() {
+    this.getData();
+  }
+
+  async getData() {
+    let data = await fetchNotes();
+    this.setState({ notes: data, is_fetching: false });
+  }
+
+  async handleItemClick(id) {
+    let selected_note = await fetchNote(id);
+
     this.setState((prevState) => {
-      return { is_creating: false, current_note_id: id };
+      return {
+        is_creating: false,
+        current_note_id: id,
+        note: selected_note,
+      };
     });
   }
+
   handleAddNote() {
     this.setState((prevState) => {
       return { is_creating: true };
     });
+  }
+
+  async handleSaveNote(data) {
+    await addNote(data);
+    await this.getData();
+  }
+
+  handleData(data) {
+    let result = JSON.parse(data);
+
+    let current_note = this.state.note;
+    if (current_note.id === result.id) {
+      this.setState({ note: result });
+    }
+  }
+
+  handleOnChange(e) {
+    let updated_data = e.target.value;
+    let current_note = this.state.note;
+    if (e.target.name == "content") {
+      current_note.content = updated_data;
+    } else if (e.target.names == "title") {
+      current_note.title = updated_data;
+    }
+
+    this.setState({
+      note: current_note,
+    });
+
+    const socket = this.refs.socket;
+    socket.state.ws.send(JSON.stringify(current_note));
+    if (!this.state.is_creating) {
+      swal("Done!!", "The note was updated successfully.", "success");
+    }
   }
 
   render() {
@@ -65,16 +110,29 @@ class App extends Component {
           </Row>
           <Row className="margin-top-5">
             <Col xs="4">
-              <ListNotes
-                notes={this.state.notes}
-                handleItemClick={(id) => this.handleItemClick(id)}
-              />
+              {this.state.is_fetching ? (
+                "Loading..."
+              ) : (
+                <ListNotes
+                  notes={this.state.notes}
+                  handleItemClick={(id) => this.handleItemClick(id)}
+                />
+              )}
             </Col>
             <Col xs="8">
-              <p>Content/ Editing Here</p>
-              {this.state.is_creating
-                ? "Creating Now.."
-                : `Editing note with id : ${this.state.current_note_id}`}
+              {this.state.is_creating ? (
+                <AddNoteForm handleSave={this.handleSaveNote} />
+              ) : (
+                <EditNoteForm
+                  handleChange={this.handleOnChange}
+                  note={this.state.note}
+                />
+              )}
+              <Websocket
+                ref="socket"
+                url="ws://127.0.0.1:8000/ws/notes"
+                onMessage={this.handleData.bind(this)}
+              />
             </Col>
           </Row>
         </Container>

@@ -26,7 +26,7 @@ code {
   position: relative;
   transition: width 0.2s ease-in-out;
   text-align: center;
-  
+
 }
 
 .add-btn:hover {
@@ -50,7 +50,7 @@ code {
   overflow: hidden;
   border-top-right-radius: 2px;
   border-bottom-right-radius: 2px;
-  
+
 }
 
 .add-btn::before {
@@ -70,7 +70,7 @@ code {
   color: #2C67AA;
   font-size: 16px;
   font-weight: 800;
-  display:inline-block;
+  display: inline-block;
 }
 
 .add-btn:hover::before,
@@ -123,5 +123,155 @@ code {
 .margin-top-22 {
   margin-top: 22px;
   color: #2C67AA;
-  
+
+}
+
+/* .save-btn {
+  border: 1.5px solid #0a83a1;
+  background: white;
+  border-radius: 10px;
+} */
+
+.save-btn {
+  z-index: 1;
+  position: relative;
+  padding: 20px 46px;
+  margin-bottom: 30px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #0a83a1;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  -webkit-transition: color 0.5s;
+  transition: color 0.5s;
+  cursor: pointer;
+  border-radius: 30px;
+}
+
+.save-btn:before {
+  content: "";
+  z-index: 1;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border: 2px solid #0a83a1;
+  border-radius: 30px;
+}
+
+.save-btn:after {
+  content: "";
+  z-index: -2;
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: all 0.3s 0.2s;
+  transition: all 0.3s 0.2s;
+  border-radius: 30px;
+}
+
+.save-btn:hover {
+  color: #FFFFFF;
+  border-radius: 30px;
+}
+
+.save-btn:hover:after {
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  left: 0;
+  top: 0;
+  border-radius: 30px;
+}
+
+.save-btn__inner {
+  z-index: -1;
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
+  background: #ffffff;
+}
+
+.save-btn__saves {
+  position: relative;
+  display: block;
+  height: 100%;
+  -webkit-filter: url("#goo");
+  filter: url("#goo");
+}
+
+.save-btn__save {
+  position: absolute;
+  top: 2px;
+  width: 25%;
+  height: 100%;
+  background: #0a83a1;
+  border-radius: 100%;
+  -webkit-transform: translate3d(0, 150%, 0) scale(1.7);
+  transform: translate3d(0, 150%, 0) scale(1.7);
+  -webkit-transition: -webkit-transform 0.45s;
+  transition: -webkit-transform 0.45s;
+  transition: transform 0.45s;
+  transition: transform 0.45s, -webkit-transform 0.45s;
+}
+
+@supports ((-webkit-filter: url("#goo")) or (filter: url("#goo"))) {
+  .save-btn__save {
+    -webkit-transform: translate3d(0, 150%, 0) scale(1.4);
+    transform: translate3d(0, 150%, 0) scale(1.4);
+  }
+}
+
+.save-btn__save:nth-child(1) {
+  left: 0%;
+  -webkit-transition-delay: 0s;
+  transition-delay: 0s;
+}
+
+.save-btn__save:nth-child(2) {
+  left: 30%;
+  -webkit-transition-delay: 0.08s;
+  transition-delay: 0.08s;
+}
+
+.save-btn__save:nth-child(3) {
+  left: 60%;
+  -webkit-transition-delay: 0.16s;
+  transition-delay: 0.16s;
+}
+
+.save-btn__save:nth-child(4) {
+  left: 90%;
+  -webkit-transition-delay: 0.24s;
+  transition-delay: 0.24s;
+}
+
+.save-btn:hover .save-btn__save {
+  -webkit-transform: translateZ(0) scale(1.7);
+  transform: translateZ(0) scale(1.7);
+}
+
+@supports ((-webkit-filter: url("#goo")) or (filter: url("#goo"))) {
+  .save-btn:hover .save-btn__save {
+    -webkit-transform: translateZ(0) scale(1.4);
+    transform: translateZ(0) scale(1.4);
+  }
+}
+
+.save-btn.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+  color: #0a83a1;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: transparent;
 }

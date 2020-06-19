@@ -77,3 +77,8 @@ Running Auto Pep for py code
 autopep8 -i settings.py
 
 autopep8 -ri notes/
+
+python manage.py dbshell
+
+delete from notes_note;  
+delete from sqlite_sequence where name='notes_note';
