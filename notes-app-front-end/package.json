@@ -11,7 +11,7 @@
     "jquery": "^3.5.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1",
+    "react-scripts": "5.0.1",
     "reactstrap": "^8.4.1",
     "sweetalert": "^2.1.2",
     "react-websocket": "^2.1.0"
@@ -39,6 +39,6 @@
     ]
   },
   "devDependencies": {
-    "prettier-eslint": "^11.0.0"
+    "prettier-eslint": "^16.4.2"
   }
 }
